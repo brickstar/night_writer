@@ -3,6 +3,16 @@ Project:
 Group Member Names:
 
 Project Expectations: What does each group member hope to get out of this project?
+collective
+1. Complete Project
+2. Work Hard, do our best, and be satisfied even if we don't complete the project
+3. Refine our problem solving process
+
+matt
+1. continue to learn how to break down complex problems into manageable pieces
+2. learn new ruby tools to do a thing
+bryan
+1.
 
 Goals and expectations:
 
