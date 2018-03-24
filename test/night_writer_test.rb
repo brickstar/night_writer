@@ -17,4 +17,8 @@ class NightWriterTest < Minitest::Test
   def test_attributes
     assert_equal "0.....", @nightwriter.dictionary["a"]
   end
+
+  def test_translate_one_letter_to_braille
+    assert_equal "00000.", @nightwriter.translate_letter("q")
+  end
 end

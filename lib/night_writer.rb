@@ -36,6 +36,10 @@ class NightWriter
                     "’" => "....0.",
                     "-" => "....00",
                     "cap" => ".....0"
-             }
+                  }
+    end
+
+    def translate_letter(letter)
+      @dictionary[letter]
     end
   end
