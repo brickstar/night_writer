@@ -1,5 +1,9 @@
 class NightWriter
-  attr_reader :dictionary, :first_row, :second_row, :third_row
+  attr_reader :dictionary,
+              :first_row,
+              :second_row,
+              :third_row
+              
   def initialize
     @dictionary = {
                     "a" => "0.....",
@@ -37,9 +41,9 @@ class NightWriter
                     "-" => "....00",
                     "cap" => ".....0"
                   }
-      @fist_row = []
+      @fist_row   = []
       @second_row = []
-      @third_row = []
+      @third_rowc = []
   end
 
   def translate_letter(letter)
