@@ -41,4 +41,8 @@ class NightWriterTest < Minitest::Test
     assert_equal  [[".."], [".."], ["0."], ["0."], ["0."], [".."], [".0"], ["0."], ["0."], ["0."], [".."]], @nw.third_row
   end
 
+  def test_convert_capitals
+    assert_equal [".....0", "0.00..", "0..0..", "0.0.0.", "0.0.0.", "0..00.", "......", ".....0", ".000.0", "0..00.", "0.000.", "0.0.0.", "00.0.."], @nw.translate_phrase("Hello World")
+  end
+
 end
