@@ -37,6 +37,7 @@ class NightWriter
                     "-" => "....00",
                     "cap" => ".....0"
                   }
+      @fist_two = []
     end
 
     def translate_letter(letter)
@@ -48,13 +49,40 @@ class NightWriter
       converted = phrase_array.map do |char|
         translate_letter(char)
       end
-      create_arrays(converted)
     end
-    
-    private
-    def create_arrays(converted)
-      converted.map do |string|
+
+    def grab_first_two(phrase)
+      first_two = create_char_arrays_first_two(phrase)
+      first_row = first_two.map do |string|
         string.split(",")
       end
+      @first_row = first_row
+      binding.pry
     end
+
+    def create_char_arrays_first_two(phrase)
+      strings = translate_phrase(phrase)
+      strings.map do |string|
+        string[0..1]
+      end
+    end
+    #
+    # def split_first_two(phrase)
+    #   letter_array = create_char_arrays(phrase)
+    #   letter_array.map do |array|
+    #     array.join
+    #   end
+    # end
+    #
+    # def create_char_arrays(converted)
+    #   converted.map do |array|
+    #     array.chars
+    #   end
+    # end
+    #
+    # def create_arrays(converted)
+    #   converted.map do |string|
+    #     string.split(",")
+    #   end
+    # end
 end

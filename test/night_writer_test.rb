@@ -23,7 +23,10 @@ class NightWriterTest < Minitest::Test
   end
 
   def test_translate_phrase_to_braille
-    assert_equal [["0.00.."], ["0..0.."], ["0.0.0."], ["0.0.0."], ["0..00."], ["......"], [".000.0"], ["0..00."], ["0.000."], ["0.0.0."], ["00.0.."]], @nw.translate_phrase("hello world")
+    assert_equal ["0.00..", "0..0..", "0.0.0.", "0.0.0.", "0..00.", "......", ".000.0", "0..00.", "0.000.", "0.0.0.", "00.0.."], @nw.translate_phrase("hello world")
   end
 
+  def test_grab_first_two_index_of_braille_array
+    assert_equal [["0."], ["0."], ["0."], ["0."], ["0."], [".."], [".0"], ["0."], ["0."], ["0."], ["00"]], @nw.grab_first_two("hello world")
+  end
 end
