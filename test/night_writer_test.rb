@@ -37,8 +37,8 @@ class NightWriterTest < Minitest::Test
   end
 
   def test_grab_third_two_index_of_braille_array
-    assert_equal  [["00"], [".0"], ["0."], ["0."], [".0"], [".."], ["00"], [".0"], ["00"], ["0."], [".0"]], @nw.grab_third_two("hello world")
-    assert_equal  [["00"], [".0"], ["0."], ["0."], [".0"], [".."], ["00"], [".0"], ["00"], ["0."], [".0"]], @nw.third_row
+    assert_equal  [[".."], [".."], ["0."], ["0."], ["0."], [".."], [".0"], ["0."], ["0."], ["0."], [".."]], @nw.grab_third_two("hello world")
+    assert_equal  [[".."], [".."], ["0."], ["0."], ["0."], [".."], [".0"], ["0."], ["0."], ["0."], [".."]], @nw.third_row
   end
 
 end

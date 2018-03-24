@@ -3,7 +3,7 @@ class NightWriter
               :first_row,
               :second_row,
               :third_row
-              
+
   def initialize
     @dictionary = {
                     "a" => "0.....",
@@ -74,7 +74,7 @@ class NightWriter
   end
   #
   def grab_third_two(phrase)
-    third_two = grab_second_two_letters(phrase)
+    third_two = grab_third_two_letters(phrase)
     third_row = third_two.map do |string|
       string.split(",")
     end
