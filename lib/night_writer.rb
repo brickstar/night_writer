@@ -1,3 +1,4 @@
+require 'pry'
 class NightWriter
   attr_reader :dictionary,
               :first_row,
@@ -54,14 +55,14 @@ class NightWriter
     container = []
     phrase_array = phrase.chars
     phrase_array.each do |char|
-      if char.upcase == char
+      if char.upcase == char && char != " "
         container << @dictionary["cap"]
-        container << translate_letter(char)
-      else
+        container << translate_letter(char.downcase)
+      elsif
         container << translate_letter(char)
       end
-      container
     end
+    container
   end
 
   def grab_first_two(phrase)
@@ -113,3 +114,5 @@ class NightWriter
   end
 
 end
+nw = NightWriter.new
+nw.translate_phrase("Hello World")
