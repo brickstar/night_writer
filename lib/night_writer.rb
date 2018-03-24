@@ -1,5 +1,5 @@
 class NightWriter
-  attr_reader :dictionary
+  attr_reader :dictionary, :first_two
   def initialize
     @dictionary = {
                     "a" => "0.....",
@@ -38,51 +38,32 @@ class NightWriter
                     "cap" => ".....0"
                   }
       @fist_two = []
-    end
+  end
 
-    def translate_letter(letter)
-      @dictionary[letter]
-    end
+  def translate_letter(letter)
+    @dictionary[letter]
+  end
 
-    def translate_phrase(phrase)
-      phrase_array = phrase.chars
-      converted = phrase_array.map do |char|
-        translate_letter(char)
-      end
+  def translate_phrase(phrase)
+    phrase_array = phrase.chars
+    phrase_array.map do |char|
+      translate_letter(char)
     end
+  end
 
-    def grab_first_two(phrase)
-      first_two = create_char_arrays_first_two(phrase)
-      first_row = first_two.map do |string|
-        string.split(",")
-      end
-      @first_row = first_row
-      binding.pry
+  def grab_first_two(phrase)
+    first_two = grab_first_two_letters(phrase)
+    first_row = first_two.map do |string|
+      string.split(",")
     end
+    @first_two = first_row
+  end
 
-    def create_char_arrays_first_two(phrase)
-      strings = translate_phrase(phrase)
-      strings.map do |string|
-        string[0..1]
-      end
+  private
+  def grab_first_two_letters(phrase)
+    strings = translate_phrase(phrase)
+    strings.map do |string|
+      string[0..1]
     end
-    #
-    # def split_first_two(phrase)
-    #   letter_array = create_char_arrays(phrase)
-    #   letter_array.map do |array|
-    #     array.join
-    #   end
-    # end
-    #
-    # def create_char_arrays(converted)
-    #   converted.map do |array|
-    #     array.chars
-    #   end
-    # end
-    #
-    # def create_arrays(converted)
-    #   converted.map do |string|
-    #     string.split(",")
-    #   end
-    # end
+  end
 end
