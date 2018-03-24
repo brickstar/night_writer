@@ -43,7 +43,7 @@ class NightWriter
                   }
       @fist_row   = []
       @second_row = []
-      @third_rowc = []
+      @third_rowche = []
   end
 
   def translate_letter(letter)
@@ -51,9 +51,16 @@ class NightWriter
   end
 
   def translate_phrase(phrase)
+    container = []
     phrase_array = phrase.chars
-    phrase_array.map do |char|
-      translate_letter(char)
+    phrase_array.each do |char|
+      if char.upcase == char
+        container << @dictionary["cap"]
+        container << translate_letter(char)
+      else
+        container << translate_letter(char)
+      end
+      container
     end
   end
 
