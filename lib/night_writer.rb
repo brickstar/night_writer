@@ -1,5 +1,5 @@
 class NightWriter
-  attr_reader :dictionary, :first_row
+  attr_reader :dictionary, :first_row, :second_row, :third_row
   def initialize
     @dictionary = {
                     "a" => "0.....",
@@ -38,6 +38,8 @@ class NightWriter
                     "cap" => ".....0"
                   }
       @fist_row = []
+      @second_row = []
+      @third_row = []
   end
 
   def translate_letter(letter)
@@ -59,6 +61,24 @@ class NightWriter
     @first_row = first_row
   end
 
+  def grab_second_two(phrase)
+    second_two = grab_second_two_letters(phrase)
+    second_row = second_two.map do |string|
+      string.split(",")
+    end
+    @second_row = second_row
+  end
+  #
+  def grab_third_two(phrase)
+    third_two = grab_second_two_letters(phrase)
+    third_row = third_two.map do |string|
+      string.split(",")
+    end
+    @third_row = third_row
+  end
+
+
+
   private
   def grab_first_two_letters(phrase)
     strings = translate_phrase(phrase)
@@ -66,4 +86,19 @@ class NightWriter
       string[0..1]
     end
   end
+
+  def grab_second_two_letters(phrase)
+    strings = translate_phrase(phrase)
+    strings.map do |string|
+      string[2..3]
+    end
+  end
+
+  def grab_third_two_letters(phrase)
+    strings = translate_phrase(phrase)
+    strings.map do |string|
+      string[4..5]
+    end
+  end
+
 end
