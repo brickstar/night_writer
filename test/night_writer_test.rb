@@ -31,21 +31,30 @@ class NightWriterTest < Minitest::Test
   end
 
   def test_grab_first_two_index_of_braille_array
-    skip
-    assert_equal [["0."], ["0."], ["0."], ["0."], ["0."], [".."], [".0"], ["0."], ["0."], ["0."], ["00"]], @nw.grab_first_two("Hello, World!?")
-    assert_equal [["0."], ["0."], ["0."], ["0."], ["0."], [".."], [".0"], ["0."], ["0."], ["0."], ["00"]], @nw.first_row
+    @nw.translate_phrase("Hello, World!?")
+
+    expected = [["..", "0.", "0.", "0.", "0.", "0.", "..", "..", "..", ".0", "0.", "0.", "0.", "00", "..", ".."]]
+
+    assert_equal expected, @nw.grab_first_two
+    assert_equal expected, @nw.first_row
   end
 
   def test_grab_second_two_index_of_braille_array
-    skip
-    assert_equal  [["00"], [".0"], ["0."], ["0."], [".0"], [".."], ["00"], [".0"], ["00"], ["0."], [".0"]], @nw.grab_second_two("Hello, World!?")
-    assert_equal  [["00"], [".0"], ["0."], ["0."], [".0"], [".."], ["00"], [".0"], ["00"], ["0."], [".0"]], @nw.second_row
+    @nw.translate_phrase("Hello, World!?")
+
+    expected = [["..", "00", ".0", "0.", "0.", ".0", "0.", "..", "..", "00", ".0", "00", "0.", ".0", "00", "0."]]
+
+    assert_equal expected, @nw.grab_second_two
+    assert_equal expected, @nw.second_row
   end
 
   def test_grab_third_two_index_of_braille_array
-    skip
-    assert_equal  [[".."], [".."], ["0."], ["0."], ["0."], [".."], [".0"], ["0."], ["0."], ["0."], [".."]], @nw.grab_third_two("Hello, World!?")
-    assert_equal  [[".."], [".."], ["0."], ["0."], ["0."], [".."], [".0"], ["0."], ["0."], ["0."], [".."]], @nw.third_row
+    @nw.translate_phrase("Hello, World!?")
+
+    expected = [[".0", "..", "..", "0.", "0.", "0.", "..", "..", ".0", ".0", "0.", "0.", "0.", "..", "0.", "00"]]
+
+    assert_equal expected, @nw.grab_third_two
+    assert_equal expected, @nw.third_row
   end
 
   def test_convert_capitals

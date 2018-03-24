@@ -44,7 +44,7 @@ class NightWriter
                     "cap" => ".....0"
                   }
       @braille    = []
-      @fist_row   = []
+      @first_row   = []
       @second_row = []
       @third_row  = []
   end
@@ -64,7 +64,33 @@ class NightWriter
       end
     end
     @braille
+
   end
+
+  def grab_first_two
+    first_two = @braille.map do |string|
+      string[0..1]
+    end
+    @first_row << first_two.join
+  end
+
+  def grab_second_two
+    second_two = @braille.map do |string|
+      string[2..3]
+    end
+    @second_row << second_two
+  end
+
+  def grab_third_two
+    third_two = @braille.map do |string|
+      string[4..5]
+    end
+    @third_row << third_two
+  end
+
+
+
 end
 nw = NightWriter.new
-nw.translate_phrase("Hello World")
+nw.translate_phrase("Hello, World")
+nw.grab_first_two
