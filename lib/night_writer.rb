@@ -1,5 +1,5 @@
 class NightWriter
-  attr_reader :dictionary, :first_two
+  attr_reader :dictionary, :first_row
   def initialize
     @dictionary = {
                     "a" => "0.....",
@@ -37,7 +37,7 @@ class NightWriter
                     "-" => "....00",
                     "cap" => ".....0"
                   }
-      @fist_two = []
+      @fist_row = []
   end
 
   def translate_letter(letter)
@@ -56,7 +56,7 @@ class NightWriter
     first_row = first_two.map do |string|
       string.split(",")
     end
-    @first_two = first_row
+    @first_row = first_row
   end
 
   private

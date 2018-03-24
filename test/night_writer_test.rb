@@ -28,6 +28,6 @@ class NightWriterTest < Minitest::Test
 
   def test_grab_first_two_index_of_braille_array
     assert_equal [["0."], ["0."], ["0."], ["0."], ["0."], [".."], [".0"], ["0."], ["0."], ["0."], ["00"]], @nw.grab_first_two("hello world")
-    assert_equal [["0."], ["0."], ["0."], ["0."], ["0."], [".."], [".0"], ["0."], ["0."], ["0."], ["00"]], @nw.first_two
+    assert_equal [["0."], ["0."], ["0."], ["0."], ["0."], [".."], [".0"], ["0."], ["0."], ["0."], ["00"]], @nw.first_row
   end
 end
