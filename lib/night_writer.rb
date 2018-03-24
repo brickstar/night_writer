@@ -42,4 +42,11 @@ class NightWriter
     def translate_letter(letter)
       @dictionary[letter]
     end
+
+    def translate_phrase(phrase)
+      phrase_array = phrase.chars
+      phrase_array.map do |char|
+        translate_letter(char)
+    end.join
   end
+end
