@@ -1,8 +1,10 @@
+require 'pry'
 class NightWriter
   attr_reader :dictionary,
               :first_row,
               :second_row,
-              :third_row
+              :third_row,
+              :braille
 
   def initialize
     @dictionary = {
@@ -37,13 +39,14 @@ class NightWriter
                     "," => "..0...",
                     "!" => "..000.",
                     "?" => "..0.00",
-                    "’" => "....0.",
+                    # "’" => "....0.",
                     "-" => "....00",
                     "cap" => ".....0"
                   }
+      @braille    = []
       @fist_row   = []
       @second_row = []
-      @third_rowche = []
+      @third_row  = []
   end
 
   def translate_letter(letter)
@@ -51,65 +54,17 @@ class NightWriter
   end
 
   def translate_phrase(phrase)
-    container = []
     phrase_array = phrase.chars
     phrase_array.each do |char|
-      if char.upcase == char
-        container << @dictionary["cap"]
-        container << translate_letter(char)
-      else
-        container << translate_letter(char)
+      if char.upcase == char && char != " " && char != "." && char != "," && char != "!" && char != "?" && char != "-"
+        @braille << @dictionary["cap"]
+        @braille << translate_letter(char.downcase)
+      elsif
+        @braille << translate_letter(char)
       end
-      container
     end
+    @braille
   end
-
-  def grab_first_two(phrase)
-    first_two = grab_first_two_letters(phrase)
-    first_row = first_two.map do |string|
-      string.split(",")
-    end
-    @first_row = first_row
-  end
-
-  def grab_second_two(phrase)
-    second_two = grab_second_two_letters(phrase)
-    second_row = second_two.map do |string|
-      string.split(",")
-    end
-    @second_row = second_row
-  end
-  #
-  def grab_third_two(phrase)
-    third_two = grab_third_two_letters(phrase)
-    third_row = third_two.map do |string|
-      string.split(",")
-    end
-    @third_row = third_row
-  end
-
-
-
-  private
-  def grab_first_two_letters(phrase)
-    strings = translate_phrase(phrase)
-    strings.map do |string|
-      string[0..1]
-    end
-  end
-
-  def grab_second_two_letters(phrase)
-    strings = translate_phrase(phrase)
-    strings.map do |string|
-      string[2..3]
-    end
-  end
-
-  def grab_third_two_letters(phrase)
-    strings = translate_phrase(phrase)
-    strings.map do |string|
-      string[4..5]
-    end
-  end
-
 end
+nw = NightWriter.new
+nw.translate_phrase("Hello World")
