@@ -19,12 +19,11 @@ class NightWriterTest < Minitest::Test
   end
 
   def test_translate_one_letter_to_braille
-    binding.pry
     assert_equal "00000.", @nw.translate_letter("q")
   end
 
-  def translate_phrase_to_braille
-    assert_equal "0.00..0..0..0.0.0.0.0.0.0..00........000.00..00.0.000.0.0.0.00.0..", @nw.translate_phrase("hello world")
+  def test_translate_phrase_to_braille
+    assert_equal [["0.00.."], ["0..0.."], ["0.0.0."], ["0.0.0."], ["0..00."], ["......"], [".000.0"], ["0..00."], ["0.000."], ["0.0.0."], ["00.0.."]], @nw.translate_phrase("hello world")
   end
 
 end

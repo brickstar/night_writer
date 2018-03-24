@@ -45,8 +45,16 @@ class NightWriter
 
     def translate_phrase(phrase)
       phrase_array = phrase.chars
-      phrase_array.map do |char|
+      converted = phrase_array.map do |char|
         translate_letter(char)
-    end.join
-  end
+      end
+      create_arrays(converted)
+    end
+    
+    private
+    def create_arrays(converted)
+      converted.map do |string|
+        string.split(",")
+      end
+    end
 end
