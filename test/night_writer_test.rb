@@ -22,7 +22,10 @@ class NightWriterTest < Minitest::Test
   end
 
   def test_translate_phrase_to_braille
-    assert_equal ["0.00..", "0..0..", "0.0.0.", "0.0.0.", "0..00.", "......", ".000.0", "0..00.", "0.000.", "0.0.0.", "00.0.."], @nw.translate_phrase("hello world")
+    expected = ["0.00..", "0..0..", "0.0.0.", "0.0.0.", "0..00.", "......", ".000.0", "0..00.", "0.000.", "0.0.0.", "00.0.."]
+    actual = @nw.translate_phrase("hello world")
+
+    assert_equal expected, actual
   end
 
   def test_grab_first_two_index_of_braille_array
@@ -53,11 +56,17 @@ class NightWriterTest < Minitest::Test
   end
 
   def test_convert_capitals
-    assert_equal [".....0", "0.00..", "0..0..", "0.0.0.", "0.0.0.", "0..00.", "......", ".....0", ".000.0", "0..00.", "0.000.", "0.0.0.", "00.0.."], @nw.translate_phrase("Hello World")
+    expected = [".....0", "0.00..", "0..0..", "0.0.0.", "0.0.0.", "0..00.", "......", ".....0", ".000.0", "0..00.", "0.000.", "0.0.0.", "00.0.."]
+    actual = @nw.translate_phrase("Hello World")
+
+    assert_equal expected, actual
   end
 
   def test_convert_special_characters
-    assert_equal ["......", "..00.0", "..0...", "------", "..000.", "..0.00", "....00", "....0."], @nw.translate_phrase(" .,\n!?-'")
+    expected = ["......", "..00.0", "..0...", "------", "..000.", "..0.00", "....00", "....0."]
+    actual = @nw.translate_phrase(" .,\n!?-'")
+
+    assert_equal expected, actual
   end
 
 end
