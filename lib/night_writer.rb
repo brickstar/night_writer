@@ -1,8 +1,10 @@
+require 'pry'
 class NightWriter
   attr_reader :dictionary,
               :first_row,
               :second_row,
-              :third_row
+              :third_row,
+              :braille
 
   def initialize
     @dictionary = {
@@ -37,13 +39,16 @@ class NightWriter
                     "," => "..0...",
                     "!" => "..000.",
                     "?" => "..0.00",
-                    "’" => "....0.",
+                    "'" => "....0.",
                     "-" => "....00",
-                    "cap" => ".....0"
+                    "cap" => ".....0",
+                    "\n" => "------"
                   }
-      @fist_row   = []
+      @alphabet   = ("A".."Z")
+      @braille    = []
+      @first_row  = []
       @second_row = []
-      @third_rowche = []
+      @third_row  = []
   end
 
   def translate_letter(letter)
@@ -51,65 +56,54 @@ class NightWriter
   end
 
   def translate_phrase(phrase)
-    container = []
     phrase_array = phrase.chars
     phrase_array.each do |char|
-      if char.upcase == char
-        container << @dictionary["cap"]
-        container << translate_letter(char)
-      else
-        container << translate_letter(char)
+      if char.upcase == char && @alphabet.include?(char)
+        @braille << @dictionary["cap"]
+        @braille << translate_letter(char.downcase)
+      elsif
+        @braille << translate_letter(char)
       end
-      container
     end
+    @braille
+    binding.pry
   end
 
-  def grab_first_two(phrase)
-    first_two = grab_first_two_letters(phrase)
-    first_row = first_two.map do |string|
-      string.split(",")
-    end
-    @first_row = first_row
-  end
-
-  def grab_second_two(phrase)
-    second_two = grab_second_two_letters(phrase)
-    second_row = second_two.map do |string|
-      string.split(",")
-    end
-    @second_row = second_row
-  end
-  #
-  def grab_third_two(phrase)
-    third_two = grab_third_two_letters(phrase)
-    third_row = third_two.map do |string|
-      string.split(",")
-    end
-    @third_row = third_row
-  end
-
-
-
-  private
-  def grab_first_two_letters(phrase)
-    strings = translate_phrase(phrase)
-    strings.map do |string|
+  def grab_first_two
+    first_two = @braille.map do |string|
       string[0..1]
     end
+    @first_row << first_two.join
   end
 
-  def grab_second_two_letters(phrase)
-    strings = translate_phrase(phrase)
-    strings.map do |string|
+  def grab_second_two
+    second_two = @braille.map do |string|
       string[2..3]
     end
+    @second_row << second_two.join
   end
 
-  def grab_third_two_letters(phrase)
-    strings = translate_phrase(phrase)
-    strings.map do |string|
+  def grab_third_two
+    third_two = @braille.map do |string|
       string[4..5]
     end
+    @third_row << third_two.join
   end
 
+  def scan_first_row
+    @first_row.join.scan(/.{1,160}/)
+  end
+
+  def scan_second_row
+    @second_row.join.scan(/.{1,160}/)
+  end
+
+  def scan_third_row
+    @third_row.join.scan(/.{1,160}/)
+  end
+
+  
 end
+
+nw = NightWriter.new
+nw.translate_phrase("hello my name is matt bricker I am years old NExt week! I can't believe i'm that fucking old WTF WTF hhahahahahahahello my name is matt bricker I am years old NExt week! I can't believe i'm that fucking old WTF WTF hhahahahahahahello my name is matt bricker I am years old NExt week! I can't believe i'm that fucking old WTF WTF hhahahahahahahello my name is matt bricker I am years old NExt week! I can't believe i'm that fucking old WTF WTF hhahahahahahahello my name is matt bricker I amyears old NExt week! I can't believe i'm that fucking old WTF WTF hhahahahahaha i am getting so old hahahahahahahahahah hasdasdhf asdfahdsfa sdfasf asfdsa")
