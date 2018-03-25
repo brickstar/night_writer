@@ -1,7 +1,10 @@
+
 require_relative 'dictionary'
 require 'pry'
 
 # this is a NightWriter class
+
+
 class NightWriter
   include Dictionary
   attr_reader :dictionary,
@@ -70,7 +73,6 @@ class NightWriter
       end
     end
     @braille
-    binding.pry
   end
 
   def grab_first_two
@@ -109,3 +111,4 @@ end
 
 nw = NightWriter.new
 nw.translate_phrase("Hello World")
+
