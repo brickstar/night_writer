@@ -8,8 +8,7 @@ class NightWriter
               :first_row,
               :second_row,
               :third_row,
-              :braille,
-              :filename
+              :braille
 
   def initialize
     @dictionary = {
@@ -53,8 +52,6 @@ class NightWriter
       @first_row  = ""
       @second_row = ""
       @third_row  = ""
-      @hash       = {}
-      @filename   = ""
   end
 
   def translate_letter(letter)
