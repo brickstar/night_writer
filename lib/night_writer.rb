@@ -1,17 +1,15 @@
-
 require_relative 'dictionary'
 require 'pry'
 
 # this is a NightWriter class
-
-
 class NightWriter
   include Dictionary
   attr_reader :dictionary,
               :first_row,
               :second_row,
               :third_row,
-              :braille
+              :braille,
+              :output
 
   def initialize
     @dictionary = {
@@ -55,7 +53,8 @@ class NightWriter
       @first_row  = ""
       @second_row = ""
       @third_row  = ""
-      @output = ""
+      @hash       = {}
+      @output     = ""
   end
 
   def translate_letter(letter)
@@ -73,6 +72,7 @@ class NightWriter
       end
     end
     @braille
+    binding.pry
   end
 
   def grab_first_two
@@ -97,7 +97,7 @@ class NightWriter
   end
 
   def scan_first_row
-    @first_row.scan(/.{1,160}/m)
+    @first_row = @first_row.scan(/.{1,160}/m)
   end
 
   def scan_second_row
@@ -110,5 +110,6 @@ class NightWriter
 end
 
 nw = NightWriter.new
-nw.translate_phrase("Hello World")
+nw.translate_phrase("He.LlO?'\n- wO,rLd! He.LlO?'\n- wO,rLd!")
 
+output = "#{hash[1] + hash[2]}"

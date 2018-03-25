@@ -10,32 +10,26 @@ class NightWriterTest < Minitest::Test
   end
 
   def test_it_exists
-    skip
     assert_instance_of NightWriter, @nw
   end
 
   def test_attributes
-    skip
     assert_equal "0.....", @nw.dictionary["a"]
   end
 
   def test_translate_one_letter_to_braille
-    skip
     assert_equal "00000.", @nw.translate_letter("q")
   end
 
   def test_translate_phrase_to_braille
-
     expected = ["0.00..", "0..0..", "0.0.0.", "0.0.0.", "0..00.", "......", ".000.0", "0..00.", "0.000.", "0.0.0.", "00.0.."]
     actual = @nw.translate_phrase("hello world")
 
     assert_equal expected, actual
-
   end
 
   def test_grab_first_two_index_of_braille_array
     @nw.translate_phrase("Hello, World!?")
-
 
     expected = "..0.0.0.0.0........00.0.0.00...."
 
@@ -54,7 +48,6 @@ class NightWriterTest < Minitest::Test
 
   def test_grab_third_two_index_of_braille_array
     @nw.translate_phrase("Hello, World!?")
-
 
     expected = ".0....0.0.0......0.00.0.0...0.00"
 
@@ -76,7 +69,6 @@ class NightWriterTest < Minitest::Test
     assert_equal expected, actual
   end
 
-
   def test_mixed_caps_and_special_characters
     expected = [".....0", "0.00..", "0..0..", "..00.0", ".....0", "0.0.0.", "0.0.0.", ".....0", "0..00.", "..0.00", "....0.", "------", "....00", "......", ".000.0", ".....0", "0..00.", "..0...", "0.000.", ".....0", "0.0.0.", "00.0..", "..000."]
     actual = @nw.translate_phrase("He.LlO?'\n- wO,rLd!")
@@ -84,7 +76,18 @@ class NightWriterTest < Minitest::Test
     assert_equal expected, actual
   end
 
-  def test_convert_special_characters
-    assert_equal ["......", "..00.0", "..0...", "..000.", "..0.00", "....00"], @nw.translate_phrase(" .,!?-")
+  def test_it_can_create_a_string_of_all_three_rows
+    @nw.translate_phrase("He.LlO?'\n- wO,rLd! He.LlO?'\n- wO,rLd!")
+    @nw.grab_first_two
+    @nw.grab_second_two
+    @nw.grab_third_two
+    @nw.scan_first_row
+    @nw.scan_second_row
+    @nw.scan_third_row
+    
+    expected = "..0.0.....0.0...0.....--.....0..0...0...0.00......0.0.....0.0...0.....--.....0..0...0...0.00..\..00.000..0.0....00...--....00...00.00..0..000....00.000..0.0....00...--....00...00.00..0..000\n.0.....0.00.0..00.000.--00...0.00...0..00...0....0.....0.00.0..00.000.--00...0.00...0..00...0.\n\n"
+    actual = @nw.output
+
+    assert_equal expected, actual
   end
 end
