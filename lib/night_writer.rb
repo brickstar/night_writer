@@ -52,6 +52,7 @@ class NightWriter
       @first_row  = ""
       @second_row = ""
       @third_row  = ""
+      @output = ""
   end
 
   def translate_letter(letter)
@@ -69,6 +70,7 @@ class NightWriter
       end
     end
     @braille
+    binding.pry
   end
 
   def grab_first_two
@@ -93,23 +95,17 @@ class NightWriter
   end
 
   def scan_first_row
-    @first_row.scan(/.{1,160}/)
+    @first_row.scan(/.{1,160}/m)
   end
 
   def scan_second_row
-    @second_row.scan(/.{1,160}/)
+    @second_row.scan(/.{1,160}/m)
   end
 
   def scan_third_row
-    @third_row.scan(/.{1,160}/)
+    @third_row.scan(/.{1,160}/m)
   end
 end
 
 nw = NightWriter.new
-nw.translate_phrase("Love, Love, Love\nLove, Love, Love\nLove, Love, Love\nThere's nothing you can do that can't be done\nNothing you can sing that can't be sung\nNothing you can say, but you can learn how to play the game it's easy")
-                    # Nothing you can
-                    # make that can't be made No one you can save that can't be
-                    # saved Nothing you can do, but you can learn how to be you in
-                    # time It's easy All you need is love, all you need is love
-                    # All you need is love, love, love is all you needAll you need
-                    # is love All you need is love, love, love is all you need
+nw.translate_phrase("Hello World")
