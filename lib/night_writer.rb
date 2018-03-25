@@ -119,7 +119,8 @@ class NightWriter
     @third_row = @third_row.scan(/.{1,160}/m)
   end
 
-  def output
+  def output(phrase)
+    translate_phrase(phrase)
     split_braille
     scan_rows
     braille_string = ""
@@ -127,18 +128,18 @@ class NightWriter
     @first_row.length.times do
     braille_string += "#{first_row[count]}\n#{second_row[count]}\n#{third_row[count]}\n\n"
     count += 1
-    braille_string
     end
+    braille_string
   end
 
-  def create_file
-    filename = File.new("braille.txt", w)
-    puts output
-    filename.close
+  def create_file(phrase)
+    filename = "braille.txt"
+    output_file = File.new("braille.txt", "w")
+    output_file.puts output(phrase)
+    output_file.close
   end
 end
 
 nw = NightWriter.new
-nw.translate_phrase("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-nw.output
-nw.create_file
+# nw.translate_phrase("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+nw.create_file("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
