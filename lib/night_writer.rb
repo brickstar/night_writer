@@ -8,8 +8,8 @@ class NightWriter
               :first_row,
               :second_row,
               :third_row,
-              :braille,
-              :output
+              :braille
+              # :output
 
   def initialize
     @dictionary = {
@@ -54,7 +54,7 @@ class NightWriter
       @second_row = ""
       @third_row  = ""
       @hash       = {}
-      @output     = ""
+      # @output     = ""
   end
 
   def translate_letter(letter)
@@ -72,7 +72,12 @@ class NightWriter
       end
     end
     @braille
-    binding.pry
+  end
+
+  def split_braille
+    grab_first_two
+    grab_second_two
+    grab_third_two
   end
 
   def grab_first_two
@@ -96,20 +101,38 @@ class NightWriter
     @third_row += third_two.join
   end
 
+  def scan_rows
+    scan_first_row
+    scan_second_row
+    scan_third_row
+  end
+
   def scan_first_row
     @first_row = @first_row.scan(/.{1,160}/m)
   end
 
   def scan_second_row
-    @second_row.scan(/.{1,160}/m)
+    @second_row = @second_row.scan(/.{1,160}/m)
   end
 
   def scan_third_row
-    @third_row.scan(/.{1,160}/m)
+    @third_row = @third_row.scan(/.{1,160}/m)
+  end
+
+  def output
+    split_braille
+    scan_rows
+    braille_string = ""
+    count = 0
+    until @first_row.empty? do
+    braille_string += "#{first_row[count]}\n#{second_row[count]}\n#{third_row[count]}"
+    binding.pry
+    count += 1
+    braille_string
+    end
   end
 end
 
 nw = NightWriter.new
-nw.translate_phrase("He.LlO?'\n- wO,rLd! He.LlO?'\n- wO,rLd!")
-
-output = "#{hash[1] + hash[2]}"
+nw.translate_phrase("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+nw.output
