@@ -61,7 +61,7 @@ class NightWriter
   def translate_phrase(phrase)
     phrase_array = phrase.chars
     phrase_array.each do |char|
-      if char.upcase == char && ("A".."Z").include?(char)
+      if char.upcase == char && ("A".."Z").cover?(char)
         @braille << @dictionary["cap"]
         @braille << translate_letter(char.downcase)
       elsif
@@ -106,12 +106,10 @@ class NightWriter
 end
 
 nw = NightWriter.new
-nw.translate_phrase("Love, Love, Love\n Love, Love, Love\n Love, Love, Love\n
-                    There's nothing you can do that can't be done Nothing
-                    you can sing that can't be sung Nothing you can say, but you
-                    can learn how to play the game it's easy") #Nothing you can
-                    #make that can't be made No one you can save that can't be
-                    #saved Nothing you can do, but you can learn how to be you in
-                    #time It's easy All you need is love, all you need is love
-                    #All you need is love, love, love is all you needAll you need
-                    #is love All you need is love, love, love is all you need
+nw.translate_phrase("Love, Love, Love\nLove, Love, Love\nLove, Love, Love\nThere's nothing you can do that can't be done\nNothing you can sing that can't be sung\nNothing you can say, but you can learn how to play the game it's easy")
+                    # Nothing you can
+                    # make that can't be made No one you can save that can't be
+                    # saved Nothing you can do, but you can learn how to be you in
+                    # time It's easy All you need is love, all you need is love
+                    # All you need is love, love, love is all you needAll you need
+                    # is love All you need is love, love, love is all you need

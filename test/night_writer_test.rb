@@ -69,4 +69,10 @@ class NightWriterTest < Minitest::Test
     assert_equal expected, actual
   end
 
+  def test_mixed_caps_and_special_characters
+    expected = [".....0", "0.00..", "0..0..", "..00.0", ".....0", "0.0.0.", "0.0.0.", ".....0", "0..00.", "..0.00", "....0.", "------", "....00", "......", ".000.0", ".....0", "0..00.", "..0...", "0.000.", ".....0", "0.0.0.", "00.0..", "..000."]
+    actual = @nw.translate_phrase("He.LlO?'\n- wO,rLd!")
+
+    assert_equal expected, actual
+  end
 end
