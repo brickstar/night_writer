@@ -31,7 +31,7 @@ class NightWriterTest < Minitest::Test
   def test_grab_first_two_index_of_braille_array
     @nw.translate_phrase("Hello, World!?")
 
-    expected = ["..0.0.0.0.0........00.0.0.00...."]
+    expected = "..0.0.0.0.0........00.0.0.00...."
 
     assert_equal expected, @nw.grab_first_two
     assert_equal expected, @nw.first_row
@@ -40,7 +40,7 @@ class NightWriterTest < Minitest::Test
   def test_grab_second_two_index_of_braille_array
     @nw.translate_phrase("Hello, World!?")
 
-    expected = ["..00.00.0..00.....00.0000..0000."]
+    expected = "..00.00.0..00.....00.0000..0000."
 
     assert_equal expected, @nw.grab_second_two
     assert_equal expected, @nw.second_row
@@ -49,7 +49,7 @@ class NightWriterTest < Minitest::Test
   def test_grab_third_two_index_of_braille_array
     @nw.translate_phrase("Hello, World!?")
 
-    expected = [".0....0.0.0......0.00.0.0...0.00"]
+    expected = ".0....0.0.0......0.00.0.0...0.00"
 
     assert_equal expected, @nw.grab_third_two
     assert_equal expected, @nw.third_row

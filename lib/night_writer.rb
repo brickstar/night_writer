@@ -49,9 +49,9 @@ class NightWriter
                     "\n" => "------"
                   }
       @braille    = []
-      @first_row  = []
-      @second_row = []
-      @third_row  = []
+      @first_row  = ""
+      @second_row = ""
+      @third_row  = ""
   end
 
   def translate_letter(letter)
@@ -75,33 +75,33 @@ class NightWriter
     first_two = @braille.map do |string|
       string[0..1]
     end
-    @first_row << first_two.join
+    @first_row += first_two.join
   end
 
   def grab_second_two
     second_two = @braille.map do |string|
       string[2..3]
     end
-    @second_row << second_two.join
+    @second_row += second_two.join
   end
 
   def grab_third_two
     third_two = @braille.map do |string|
       string[4..5]
     end
-    @third_row << third_two.join
+    @third_row += third_two.join
   end
 
   def scan_first_row
-    @first_row.join.scan(/.{1,160}/)
+    @first_row.scan(/.{1,160}/)
   end
 
   def scan_second_row
-    @second_row.join.scan(/.{1,160}/)
+    @second_row.scan(/.{1,160}/)
   end
 
   def scan_third_row
-    @third_row.join.scan(/.{1,160}/)
+    @third_row.scan(/.{1,160}/)
   end
 end
 
