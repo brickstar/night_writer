@@ -8,8 +8,8 @@ class NightWriter
               :first_row,
               :second_row,
               :third_row,
-              :braille
-              # :output
+              :braille,
+              :filename
 
   def initialize
     @dictionary = {
@@ -54,7 +54,7 @@ class NightWriter
       @second_row = ""
       @third_row  = ""
       @hash       = {}
-      # @output     = ""
+      @filename   = ""
   end
 
   def translate_letter(letter)
@@ -126,20 +126,17 @@ class NightWriter
     braille_string = ""
     count = 0
     @first_row.length.times do
-    braille_string += "#{first_row[count]}\n#{second_row[count]}\n#{third_row[count]}\n\n"
+    braille_string += "#{first_row[count]}\n#{second_row[count]}\n#{third_row[count]}\n"
     count += 1
     end
     braille_string
   end
 
-  def create_file(phrase)
-    filename = "braille.txt"
-    output_file = File.new("braille.txt", "w")
-    output_file.puts output(phrase)
-    output_file.close
+
+
+  def read_file
+    input_file = File.open("message.txt", "r")
+    @filename = input_file.sysread
+
   end
 end
-
-nw = NightWriter.new
-# nw.translate_phrase("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-nw.create_file("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
