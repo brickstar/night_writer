@@ -1,5 +1,4 @@
-require 'minitest/autorun'
-require 'minitest/pride'
+require_relative 'test_helper'
 require './lib/night_writer'
 require 'pry'
 
@@ -26,14 +25,19 @@ class NightWriterTest < Minitest::Test
   end
 
   def test_translate_phrase_to_braille
-    skip
-    assert_equal ["0.00..", "0..0..", "0.0.0.", "0.0.0.", "0..00.", "......", ".000.0", "0..00.", "0.000.", "0.0.0.", "00.0.."], @nw.translate_phrase("hello world")
+
+    expected = ["0.00..", "0..0..", "0.0.0.", "0.0.0.", "0..00.", "......", ".000.0", "0..00.", "0.000.", "0.0.0.", "00.0.."]
+    actual = @nw.translate_phrase("hello world")
+
+    assert_equal expected, actual
+
   end
 
   def test_grab_first_two_index_of_braille_array
     @nw.translate_phrase("Hello, World!?")
 
-    expected = [["..", "0.", "0.", "0.", "0.", "0.", "..", "..", "..", ".0", "0.", "0.", "0.", "00", "..", ".."]]
+
+    expected = "..0.0.0.0.0........00.0.0.00...."
 
     assert_equal expected, @nw.grab_first_two
     assert_equal expected, @nw.first_row
@@ -42,7 +46,7 @@ class NightWriterTest < Minitest::Test
   def test_grab_second_two_index_of_braille_array
     @nw.translate_phrase("Hello, World!?")
 
-    expected = [["..", "00", ".0", "0.", "0.", ".0", "0.", "..", "..", "00", ".0", "00", "0.", ".0", "00", "0."]]
+    expected = "..00.00.0..00.....00.0000..0000."
 
     assert_equal expected, @nw.grab_second_two
     assert_equal expected, @nw.second_row
@@ -51,18 +55,36 @@ class NightWriterTest < Minitest::Test
   def test_grab_third_two_index_of_braille_array
     @nw.translate_phrase("Hello, World!?")
 
-    expected = [[".0", "..", "..", "0.", "0.", "0.", "..", "..", ".0", ".0", "0.", "0.", "0.", "..", "0.", "00"]]
+
+    expected = ".0....0.0.0......0.00.0.0...0.00"
 
     assert_equal expected, @nw.grab_third_two
     assert_equal expected, @nw.third_row
   end
 
   def test_convert_capitals
-    assert_equal [".....0", "0.00..", "0..0..", "0.0.0.", "0.0.0.", "0..00.", "......", ".....0", ".000.0", "0..00.", "0.000.", "0.0.0.", "00.0.."], @nw.translate_phrase("Hello World")
+    expected = [".....0", "0.00..", "0..0..", "0.0.0.", "0.0.0.", "0..00.", "......", ".....0", ".000.0", "0..00.", "0.000.", "0.0.0.", "00.0.."]
+    actual = @nw.translate_phrase("Hello World")
+
+    assert_equal expected, actual
+  end
+
+  def test_convert_special_characters
+    expected = ["......", "..00.0", "..0...", "------", "..000.", "..0.00", "....00", "....0."]
+    actual = @nw.translate_phrase(" .,\n!?-'")
+
+    assert_equal expected, actual
+  end
+
+
+  def test_mixed_caps_and_special_characters
+    expected = [".....0", "0.00..", "0..0..", "..00.0", ".....0", "0.0.0.", "0.0.0.", ".....0", "0..00.", "..0.00", "....0.", "------", "....00", "......", ".000.0", ".....0", "0..00.", "..0...", "0.000.", ".....0", "0.0.0.", "00.0..", "..000."]
+    actual = @nw.translate_phrase("He.LlO?'\n- wO,rLd!")
+
+    assert_equal expected, actual
   end
 
   def test_convert_special_characters
     assert_equal ["......", "..00.0", "..0...", "..000.", "..0.00", "....00"], @nw.translate_phrase(" .,!?-")
   end
-
 end

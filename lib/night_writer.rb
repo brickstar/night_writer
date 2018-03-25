@@ -1,5 +1,12 @@
+
+require_relative 'dictionary'
 require 'pry'
+
+# this is a NightWriter class
+
+
 class NightWriter
+  include Dictionary
   attr_reader :dictionary,
               :first_row,
               :second_row,
@@ -39,14 +46,16 @@ class NightWriter
                     "," => "..0...",
                     "!" => "..000.",
                     "?" => "..0.00",
-                    # "’" => "....0.",
+                    "'" => "....0.",
                     "-" => "....00",
-                    "cap" => ".....0"
+                    "cap" => ".....0",
+                    "\n" => "------"
                   }
       @braille    = []
-      @first_row   = []
-      @second_row = []
-      @third_row  = []
+      @first_row  = ""
+      @second_row = ""
+      @third_row  = ""
+      @output = ""
   end
 
   def translate_letter(letter)
@@ -56,7 +65,7 @@ class NightWriter
   def translate_phrase(phrase)
     phrase_array = phrase.chars
     phrase_array.each do |char|
-      if char.upcase == char && char != " " && char != "." && char != "," && char != "!" && char != "?" && char != "-"
+      if char.upcase == char && ("A".."Z").cover?(char)
         @braille << @dictionary["cap"]
         @braille << translate_letter(char.downcase)
       elsif
@@ -64,33 +73,42 @@ class NightWriter
       end
     end
     @braille
-
   end
 
   def grab_first_two
     first_two = @braille.map do |string|
       string[0..1]
     end
-    @first_row << first_two.join
+    @first_row += first_two.join
   end
 
   def grab_second_two
     second_two = @braille.map do |string|
       string[2..3]
     end
-    @second_row << second_two
+    @second_row += second_two.join
   end
 
   def grab_third_two
     third_two = @braille.map do |string|
       string[4..5]
     end
-    @third_row << third_two
+    @third_row += third_two.join
   end
 
+  def scan_first_row
+    @first_row.scan(/.{1,160}/m)
+  end
 
+  def scan_second_row
+    @second_row.scan(/.{1,160}/m)
+  end
 
+  def scan_third_row
+    @third_row.scan(/.{1,160}/m)
+  end
 end
+
 nw = NightWriter.new
-nw.translate_phrase("Hello, World")
-nw.grab_first_two
+nw.translate_phrase("Hello World")
+
