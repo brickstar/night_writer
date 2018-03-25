@@ -61,8 +61,8 @@ class NightWriter
     @dictionary[letter]
   end
 
-  def translate_phrase
-    phrase_array = filename.chars
+  def translate_phrase(phrase)
+    phrase_array = phrase.chars
     phrase_array.each do |char|
       if char.upcase == char && ("A".."Z").cover?(char)
         @braille << @dictionary["cap"]
@@ -119,25 +119,20 @@ class NightWriter
     @third_row = @third_row.scan(/.{1,160}/m)
   end
 
-  def output
-    translate_phrase
+  def output(phrase)
+    translate_phrase(phrase)
     split_braille
     scan_rows
     braille_string = ""
     count = 0
     @first_row.length.times do
-    braille_string += "#{first_row[count]}\n#{second_row[count]}\n#{third_row[count]}\n\n"
+    braille_string += "#{first_row[count]}\n#{second_row[count]}\n#{third_row[count]}\n"
     count += 1
     end
     braille_string
   end
 
-  def create_file
-    filename = "braille.txt"
-    output_file = File.new("braille.txt", "w")
-    output_file.puts output
-    output_file.close
-  end
+
 
   def read_file
     input_file = File.open("message.txt", "r")
@@ -145,7 +140,3 @@ class NightWriter
 
   end
 end
-
-nw = NightWriter.new
-
-nw.create_file
