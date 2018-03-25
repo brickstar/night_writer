@@ -66,7 +66,6 @@ class NightWriter
       end
     end
     @braille
-    binding.pry
   end
 
   def grab_first_two
