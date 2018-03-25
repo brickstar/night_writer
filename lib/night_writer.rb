@@ -131,12 +131,4 @@ class NightWriter
     end
     braille_string
   end
-
-
-
-  def read_file
-    input_file = File.open("message.txt", "r")
-    @filename = input_file.sysread
-
-  end
 end
