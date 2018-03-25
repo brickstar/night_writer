@@ -48,7 +48,6 @@ class NightWriter
                     "cap" => ".....0",
                     "\n" => "------"
                   }
-      @alphabet   = ("A".."Z")
       @braille    = []
       @first_row  = []
       @second_row = []
@@ -62,7 +61,7 @@ class NightWriter
   def translate_phrase(phrase)
     phrase_array = phrase.chars
     phrase_array.each do |char|
-      if char.upcase == char && @alphabet.include?(char)
+      if char.upcase == char && ("A".."Z").include?(char)
         @braille << @dictionary["cap"]
         @braille << translate_letter(char.downcase)
       elsif
