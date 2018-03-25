@@ -8,8 +8,8 @@ class NightWriter
               :first_row,
               :second_row,
               :third_row,
-              :braille
-              # :output
+              :braille,
+              :filename
 
   def initialize
     @dictionary = {
@@ -54,15 +54,15 @@ class NightWriter
       @second_row = ""
       @third_row  = ""
       @hash       = {}
-      # @output     = ""
+      @filename   = ""
   end
 
   def translate_letter(letter)
     @dictionary[letter]
   end
 
-  def translate_phrase(phrase)
-    phrase_array = phrase.chars
+  def translate_phrase
+    phrase_array = filename.chars
     phrase_array.each do |char|
       if char.upcase == char && ("A".."Z").cover?(char)
         @braille << @dictionary["cap"]
@@ -119,8 +119,8 @@ class NightWriter
     @third_row = @third_row.scan(/.{1,160}/m)
   end
 
-  def output(phrase)
-    translate_phrase(phrase)
+  def output
+    translate_phrase
     split_braille
     scan_rows
     braille_string = ""
@@ -132,14 +132,20 @@ class NightWriter
     braille_string
   end
 
-  def create_file(phrase)
+  def create_file
     filename = "braille.txt"
     output_file = File.new("braille.txt", "w")
-    output_file.puts output(phrase)
+    output_file.puts output
     output_file.close
+  end
+
+  def read_file
+    input_file = File.open("message.txt", "r")
+    @filename = input_file.sysread
+
   end
 end
 
 nw = NightWriter.new
-# nw.translate_phrase("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-nw.create_file("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+
+nw.create_file
