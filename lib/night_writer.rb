@@ -101,9 +101,15 @@ class NightWriter
   def scan_third_row
     @third_row.join.scan(/.{1,160}/)
   end
-
-  
 end
 
 nw = NightWriter.new
-nw.translate_phrase("hello my name is matt bricker I am years old NExt week! I can't believe i'm that fucking old WTF WTF hhahahahahahahello my name is matt bricker I am years old NExt week! I can't believe i'm that fucking old WTF WTF hhahahahahahahello my name is matt bricker I am years old NExt week! I can't believe i'm that fucking old WTF WTF hhahahahahahahello my name is matt bricker I am years old NExt week! I can't believe i'm that fucking old WTF WTF hhahahahahahahello my name is matt bricker I amyears old NExt week! I can't believe i'm that fucking old WTF WTF hhahahahahaha i am getting so old hahahahahahahahahah hasdasdhf asdfahdsfa sdfasf asfdsa")
+nw.translate_phrase("Love, Love, Love\n Love, Love, Love\n Love, Love, Love\n
+                    There's nothing you can do that can't be done Nothing
+                    you can sing that can't be sung Nothing you can say, but you
+                    can learn how to play the game it's easy Nothing you can
+                    make that can't be made No one you can save that can't be
+                    saved Nothing you can do, but you can learn how to be you in
+                    time It's easy All you need is love, all you need is love
+                    All you need is love, love, love is all you needAll you need
+                    is love All you need is love, love, love is all you need")
