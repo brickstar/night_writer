@@ -130,7 +130,7 @@ class NightWriter
   end
 end
 
-# grab each line of 160 braille characters as strings and store them each in a variable
+# grab each line of 160 braille characters as strings and store each in a variable
 # call .scan(/.{1,2}/m) on each line => this breaks up into an array of two character strings
 # first_row.zip(second_row.zip(third_row)) => this takes all three rows and puts them back in order
 # flatten this new nested zipped array => this will return a string back in order
