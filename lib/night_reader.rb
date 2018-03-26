@@ -1,0 +1,4 @@
+
+class NightReader
+
+end
