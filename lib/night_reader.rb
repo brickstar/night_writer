@@ -1,6 +1,8 @@
 
 class NightReader
-
+  attr_reader :first_row,
+              :second_row,
+              :third_row
 
 def initialize
 
@@ -40,4 +42,10 @@ def initialize
                   "-" => "....00",
                   "cap" => ".....0"
                 }
+    @first_row  = []
+    @second_row = []
+    @third_row  = []
+  end
+
+  
 end

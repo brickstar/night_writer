@@ -10,7 +10,9 @@ def test_instance_of_night_reader
   assert_instance_of Nightreader, braille_text
 end
 
-
+def test_split_into_braille_into_three_rows
+  
+end
 
 
 
