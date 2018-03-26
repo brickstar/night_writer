@@ -4,7 +4,7 @@ class NightReader
               :second_row,
               :third_row
 
-def initialize
+  def initialize
 
   @dictionary = {
                   "a" => "0.....",
@@ -48,20 +48,27 @@ def initialize
     @third_row  = []
   end
 
-def split_into_rows(input)
-  count = 1
-  input.length.times do
-    if count == 1
-      @first_row << input.shift
-      count = 2
-    elsif count == 2
-      @second_row << input.shift
-      count = 3
-    elsif count == 3
-      @third_row << input.shift
-      count = 1
+  def split_into_rows(input)
+    count = 1
+    input.length.times do
+      if count == 1
+        @first_row << input.shift
+        count = 2
+      elsif count == 2
+        @second_row << input.shift
+        count = 3
+      elsif count == 3
+        @third_row << input.shift
+        count = 1
+      end
     end
   end
-end
 
+  def scan_rows
+    scan_first_row
+    scan_second_row
+    scan_third_row
+  end
+
+  
 end
