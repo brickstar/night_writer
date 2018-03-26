@@ -32,8 +32,9 @@ end
 
 def test_can_we_create_two_item_arrays
   nr = NightReader.new
+  nr.split_into_rows("0000000000..........")
 
-
+  assert_equal ["00", "00", "00", "00", "00", "..", "..", "..", "..", ".."], nr.first_row.scan_rows
 end
 
 
