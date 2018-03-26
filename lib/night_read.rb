@@ -5,6 +5,6 @@ input = braille.read.delete("\n")
 braille.close
 
 nr = NightReader.new
-message = File.new('./lib/message.txt','w')
-message.puts(nw.output(input))
+message = File.new('./lib/original_message.txt','w')
+message.puts(nr.output(input))
 message.close
