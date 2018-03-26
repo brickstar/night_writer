@@ -45,7 +45,7 @@ class NightWriter
                     "?" => "..0.00",
                     "'" => "....0.",
                     "-" => "....00",
-                    "cap" => ".....0",
+                    "caps" => ".....0",
                     "\n" => "------"
                   }
       @braille    = []
@@ -62,7 +62,7 @@ class NightWriter
     phrase_array = phrase.chars
     phrase_array.each do |char|
       if char.upcase == char && ("A".."Z").cover?(char)
-        @braille << @dictionary["cap"]
+        @braille << @dictionary["caps"]
         @braille << translate_letter(char.downcase)
       elsif
         @braille << translate_letter(char)
@@ -113,7 +113,7 @@ class NightWriter
   end
 
   def scan_third_row
-    @third_row = @third_row.scan
+    @third_row = @third_row.scan(/.{1,160}/m)
   end
 
   def output(phrase)
