@@ -10,7 +10,7 @@ def test_instance_of_night_reader
   assert_instance_of NightReader, nr
 end
 
-def test_split_into_braille_into_three_rows
+def test_it_can_split_into_braille_into_three_rows
   nr = NightReader.new
   nr.split_into_rows(["..0.0.0.0.......0.0.0.0.......0.0.0.0.....0.0.0.0.......0.0.0.0.......0.0.0.0.....0.0.0.0.......0.0.0.0.......0.0.0.0......00.0.0.0....0..000..00..00000..000.0.\n",
                       "..0..00..00.....0..00..00.....0..00..000..0..00..00.....0..00..00.....0..00..000..0..00..00.....0..00..00.....0..00..00...0000.000.0..0....0.000000..000...0.0..\n",
@@ -31,6 +31,7 @@ def test_split_into_braille_into_three_rows
 end
 
 def test_can_we_create_two_item_arrays
+  nr = NightReader.new
 
 
 end
