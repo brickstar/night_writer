@@ -1,6 +1,8 @@
 
 class NightReader
-
+  attr_reader :first_row,
+              :second_row,
+              :third_row
 
 def initialize
 
@@ -40,4 +42,26 @@ def initialize
                   "-" => "....00",
                   "cap" => ".....0"
                 }
+    @braille    = ""
+    @first_row  = []
+    @second_row = []
+    @third_row  = []
+  end
+
+def split_into_rows(input)
+  count = 1
+  input.length.times do
+    if count == 1
+      @first_row << input.shift
+      count = 2
+    elsif count == 2
+      @second_row << input.shift
+      count = 3
+    elsif count == 3
+      @third_row << input.shift
+      count = 1
+    end
+  end
+end
+
 end
