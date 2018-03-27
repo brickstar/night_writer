@@ -70,5 +70,20 @@ class NightReader
     scan_third_row
   end
 
-  
+  def scan_first_row
+    @first_row = @first_row.join.delete("\n")
+    @first_row = @first_row.scan(/.{1,2}/m)
+  end
+
+  def scan_second_row
+    @second_row = @second_row.join.delete("\n")
+    @second_row = @second_row.scan(/.{1,2}/m)
+  end
+
+  def scan_third_row
+    @third_row = @third_row.join.delete("\n")
+    @third_row = @third_row.scan(/.{1,2}/m)
+  end
+
+
 end
