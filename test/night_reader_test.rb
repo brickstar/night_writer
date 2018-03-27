@@ -53,7 +53,12 @@ class NightReaderTest < Minitest::Test
     nr.split_into_rows(["0.0.0.0.0....00.0.0.00", "00.00.0..0..00.0000..0", "....0.0.0....00.0.0..."])
     nr.scan_rows
     nr.zip_rows
-
-    assert_equal ["0.00..", "0..0..", "0.0.0.", "0.0.0."]
+    assert_equal ["0.00..", "0..0..", "0.0.0.", "0.0.0.", "0..00.", "......", ".000.0", "0..00.", "0.000.", "0.0.0.", "00.0.."], nr.convert_to_braille_strings
   end
+
+  def test_tranlate_letter
+    nr = NightReader.new
+    nr.split_into_rows(["0.", "00", ".."])
+    nr.scan_rows
+    nr.
 end

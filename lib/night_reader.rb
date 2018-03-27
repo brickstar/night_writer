@@ -88,4 +88,8 @@ class NightReader
   def zip_rows
     @braille = @first_row.zip(@second_row, @third_row).join
   end
-end 
+
+  def convert_to_braille_strings
+    @braille = @braille.scan(/.{1,6}/m)
+  end
+end
