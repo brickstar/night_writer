@@ -60,5 +60,9 @@ class NightReaderTest < Minitest::Test
     nr = NightReader.new
     nr.split_into_rows(["0.", "00", ".."])
     nr.scan_rows
-    nr.
+    nr.zip_rows
+    nr.convert_to_braille_strings
+
+    assert_equal ["h"] = nr.translate_letter
+  end
 end
