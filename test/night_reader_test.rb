@@ -47,4 +47,13 @@ class NightReaderTest < Minitest::Test
 
     assert_equal "00..0.00..0.00..0.00..0.00..0.", nr.zip_rows
   end
+
+  def test_convert_to_braille_string_arrays
+    nr = NightReader.new
+    nr.split_into_rows(["0.0.0.0.0....00.0.0.00", "00.00.0..0..00.0000..0", "....0.0.0....00.0.0..."])
+    nr.scan_rows
+    nr.zip_rows
+
+    assert_equal ["0.00..", "0..0..", "0.0.0.", "0.0.0."]
+  end
 end
