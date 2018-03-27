@@ -42,7 +42,8 @@ class NightReader
                   "?" => "..0.00",
                   "’" => "....0.",
                   "-" => "....00",
-                  "%" => ".....0"
+                  "%" => ".....0",
+                  "\n" => "------"
                 }
     @braille    = ""
     @first_row  = []
@@ -118,8 +119,19 @@ class NightReader
 
   def strip_capital_key
     english = convert_capitals
-    english.map do |word|
+    output = english.map do |word|
       word.delete("%")
     end
+    output
+  end
+
+  def output(input)
+    split_into_rows(input)
+    scan_rows
+    zip_rows
+    convert_to_braille_strings
+    braille_to_eng
+    convert_capitals
+    strip_capital_key.join
   end
 end
