@@ -85,5 +85,9 @@ class NightReader
     @third_row = @third_row.scan(/.{1,2}/m)
   end
 
+  def zip_rows
+    
+  end
+
 
 end
