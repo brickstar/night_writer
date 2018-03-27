@@ -42,6 +42,7 @@ class NightReaderTest < Minitest::Test
 
   def test_can_we_zip_the_rows
     nr = NightReader.new
+
     nr.split_into_rows(["0000000000\n", "..........\n", "0.0.0.0.0.\n"])
     nr.scan_rows
 
@@ -50,19 +51,40 @@ class NightReaderTest < Minitest::Test
 
   def test_convert_to_braille_string_arrays
     nr = NightReader.new
+
     nr.split_into_rows(["0.0.0.0.0....00.0.0.00", "00.00.0..0..00.0000..0", "....0.0.0....00.0.0..."])
     nr.scan_rows
     nr.zip_rows
+
     assert_equal ["0.00..", "0..0..", "0.0.0.", "0.0.0.", "0..00.", "......", ".000.0", "0..00.", "0.000.", "0.0.0.", "00.0.."], nr.convert_to_braille_strings
   end
 
   def test_tranlate_letter
     nr = NightReader.new
-    nr.split_into_rows(["0.", "00", ".."])
+
+    assert_equal "h", nr.translate_braille_letter("0.00..")
+  end
+
+  def test_translate_braille_phrase
+    nr = NightReader.new
+
+    nr.split_into_rows(["0.0.0.0.0....00.0.0.00", "00.00.0..0..00.0000..0", "....0.0.0....00.0.0..."])
     nr.scan_rows
     nr.zip_rows
     nr.convert_to_braille_strings
 
-    assert_equal ["h"] = nr.translate_letter
+    assert_equal ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"], nr.braille_to_eng
+  end
+
+  def test_convert_braille_capital_letters
+    nr = NightReader.new
+
+    nr.split_into_rows(["..0.0.0.0.0....00.0.0.00", "..00.00.0..0..00.0000..0", ".0....0.0.0....00.0.0..."])
+    nr.scan_rows
+    nr.zip_rows
+    nr.convert_to_braille_strings
+    nr.braille_to_eng
+
+    assert_equal ["%", "h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"], nr.convert_capitals
   end
 end

@@ -2,7 +2,9 @@
 class NightReader
   attr_reader :first_row,
               :second_row,
-              :third_row
+              :third_row,
+              :dictionary,
+              :braille
 
   def initialize
 
@@ -40,7 +42,7 @@ class NightReader
                   "?" => "..0.00",
                   "’" => "....0.",
                   "-" => "....00",
-                  "cap" => ".....0"
+                  "%" => ".....0"
                 }
     @braille    = ""
     @first_row  = []
@@ -91,5 +93,29 @@ class NightReader
 
   def convert_to_braille_strings
     @braille = @braille.scan(/.{1,6}/m)
+  end
+
+  def translate_braille_letter(letter)
+    inverted = @dictionary.invert
+    inverted[letter]
+  end
+
+  def braille_to_eng
+    @braille = @braille.map do |char|
+      translate_braille_letter(char)
+    end
+  end
+
+  def convert_capitals
+    english = @braille
+    @braille.map.with_index do |char, index|
+      if char == "%"
+        binding.pry
+        english[index + 1].upcase
+      else
+        char
+      end
+      english
+    end
   end
 end
