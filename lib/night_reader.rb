@@ -42,7 +42,8 @@ class NightReader
                   "?" => "..0.00",
                   "’" => "....0.",
                   "-" => "....00",
-                  "%" => ".....0"
+                  "%" => ".....0",
+                  "\n" => "------"
                 }
     @braille    = ""
     @first_row  = []
@@ -110,12 +111,27 @@ class NightReader
     english = @braille
     @braille.map.with_index do |char, index|
       if char == "%"
-        binding.pry
-        english[index + 1].upcase
-      else
-        char
+        english[index + 1] = english[index + 1].upcase
       end
-      english
     end
+    english
+  end
+
+  def strip_capital_key
+    english = convert_capitals
+    output = english.map do |word|
+      word.delete("%")
+    end
+    output
+  end
+
+  def output(input)
+    split_into_rows(input)
+    scan_rows
+    zip_rows
+    convert_to_braille_strings
+    braille_to_eng
+    convert_capitals
+    strip_capital_key.join
   end
 end
