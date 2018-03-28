@@ -91,22 +91,3 @@ class NightWriter
     braille_string
   end
 end
-
-# grab each line of 160 braille characters as strings and store each in a variable
-# call .scan(/.{1,2}/m) on each line => this breaks up into an array of two character strings
-# first_row.zip(second_row.zip(third_row)) => this takes all three rows and puts them back in order
-# flatten this new nested zipped array => this will return a string back in order
-
-# the line below is the first three rows of our song lyrics put back into original order (cap then l o v e   etc...)
-# ".....00.0.0.0..00.0.0.000..0....0..............00.0.0.0..00.0.0.000..0....0..............00.0.0.0..00.0.0.000..0....000......00.0.0.0..00.0.0.000..0....0..............00.0.0.0..00.0.0.000..0....0..............00.0.0.0..00.0.0.000..0....000......00.0.0.0..00.0.0.000..0....0..............00.0.0.0..00.0.0.000..0....0..............00.0.0.0..00.0.0.000..0....0.00.....0.0000.0.00..0..0..0.000.0..0......0..00.0.......00.00.0..00..0000.0.00...00...00.00.0000......0000.0000..00.0...00"
-
-# then use .scan(/.{1,6}/) again to cut this up into an array of 6 character strings
-# convert back to english with the inverted dictionary
-
-
-# def braille_to_eng(phrase)
-#    inverted = @dictionary.invert
-  #   phrase.chars.map do |char|
-  #     inverted[char]
-  #   end.join
-  # end
