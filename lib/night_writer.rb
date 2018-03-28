@@ -7,13 +7,15 @@ class NightWriter
   attr_reader :first_row,
               :second_row,
               :third_row,
-              :braille
+              :braille,
+              :braille_string
 
   def initialize
       @braille    = []
       @first_row  = ""
       @second_row = ""
       @third_row  = ""
+      @braille_string = ""
   end
 
   def translate_letter(letter)
@@ -82,12 +84,11 @@ class NightWriter
     translate_phrase(phrase)
     split_braille
     scan_rows
-    braille_string = ""
     count = 0
     @first_row.length.times do
-    braille_string += "#{first_row[count]}\n#{second_row[count]}\n#{third_row[count]}\n"
+    @braille_string += "#{first_row[count]}\n#{second_row[count]}\n#{third_row[count]}\n"
     count += 1
     end
-    braille_string
+    @braille_string
   end
 end
