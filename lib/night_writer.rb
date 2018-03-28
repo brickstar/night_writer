@@ -67,15 +67,15 @@ class NightWriter
   end
 
   def scan_first_row
-    @first_row = @first_row.scan(/.{1,160}/m)
+    @first_row = @first_row.scan(/.{1,80}/m)
   end
 
   def scan_second_row
-    @second_row = @second_row.scan(/.{1,160}/m)
+    @second_row = @second_row.scan(/.{1,80}/m)
   end
 
   def scan_third_row
-    @third_row = @third_row.scan(/.{1,160}/m)
+    @third_row = @third_row.scan(/.{1,80}/m)
   end
 
   def output(phrase)
