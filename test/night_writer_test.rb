@@ -76,11 +76,19 @@ class NightWriterTest < Minitest::Test
     assert_equal expected, actual
   end
 
-  def test_it_can_create_a_string_of_all_three_rows
+  def test_scan_rows
+    @nw.translate_phrase("Hello, World")
+    @nw.split_braille
+    @nw.scan_rows
 
-    expected = "..0.0.....0.0...0.....--.....0..0...0...0.00......0.0.....0.0...0.....--.....0..0...0...0.00..\n..00.000..0.0....00...--....00...00.00..0..000....00.000..0.0....00...--....00...00.00..0..000\n.0.....0.00.0..00.000.--00...0.00...0..00...0....0.....0.00.0..00.000.--00...0.00...0..00...0."
-    actual = @nw.output("He.LlO?'\n- wO,rLd! He.LlO?'\n- wO,rLd!")
+    expected   = ["..0.0.0.0.0........00.0.0.00"]
+    expected_1 = ["..00.00.0..00.....00.0000..0"]
+    expected_2 = [".0....0.0.0......0.00.0.0..."]
 
-    assert_equal expected, actual
+
+    assert_equal expected, @nw.first_row
+    assert_equal expected_1, @nw.second_row
+    assert_equal expected_2, @nw.third_row
   end
+
 end
