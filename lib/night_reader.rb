@@ -119,10 +119,10 @@ class NightReader
 
   def strip_capital_key
     english = convert_capitals
-    output = english.map do |word|
+    eng_output = english.map do |word|
       word.delete("%")
     end
-    output
+    eng_output
   end
 
   def output(input)
