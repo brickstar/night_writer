@@ -1,53 +1,15 @@
 require_relative 'dictionary'
 require 'pry'
-
 # this is a NightWriter class
 class NightWriter
   include Dictionary
-  attr_reader :dictionary,
-              :first_row,
+
+  attr_reader :first_row,
               :second_row,
               :third_row,
               :braille
 
   def initialize
-    @dictionary = {
-                    "a" => "0.....",
-                    "b" => "0.0...",
-                    "c" => "00....",
-                    "d" => "00.0..",
-                    "e" => "0..0..",
-                    "f" => "000...",
-                    "g" => "0000..",
-                    "h" => "0.00..",
-                    "i" => ".00...",
-                    "j" => ".000..",
-                    "k" => "0...0.",
-                    "l" => "0.0.0.",
-                    "m" => "00..0.",
-                    "n" => "00.00.",
-                    "o" => "0..00.",
-                    "p" => "000.0.",
-                    "q" => "00000.",
-                    "r" => "0.000.",
-                    "s" => ".00.0.",
-                    "t" => ".0000.",
-                    "u" => "0...00",
-                    "v" => "0.0.00",
-                    "w" => ".000.0",
-                    "x" => "00..00",
-                    "y" => "00.000",
-                    "z" => "0..000",
-                    " " => "......",
-                    "." => "..00.0",
-                    "," => "..0...",
-                    "!" => "..000.",
-                    "?" => "..0.00",
-                    "'" => "....0.",
-                    "-" => "....00",
-                    "caps" => ".....0",
-                    "\n" => "------"
-                  }
       @braille    = []
       @first_row  = ""
       @second_row = ""
@@ -55,14 +17,14 @@ class NightWriter
   end
 
   def translate_letter(letter)
-    @dictionary[letter]
+    dictionary[letter]
   end
 
   def translate_phrase(phrase)
     phrase_array = phrase.chars
     phrase_array.each do |char|
       if char.upcase == char && ("A".."Z").cover?(char)
-        @braille << @dictionary["caps"]
+        @braille << dictionary["%"]
         @braille << translate_letter(char.downcase)
       elsif
         @braille << translate_letter(char)
