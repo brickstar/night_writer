@@ -1,4 +1,6 @@
 require_relative "dictionary"
+
+# this is a NightReader class
 class NightReader
   include Dictionary
 
@@ -12,6 +14,16 @@ class NightReader
     @first_row  = []
     @second_row = []
     @third_row  = []
+  end
+
+  def output(input)
+    split_into_rows(input)
+    scan_rows_to_length_of_eighty
+    zip_rows
+    convert_to_braille_strings
+    braille_to_eng
+    convert_capitals
+    strip_capital_key.join
   end
 
   def split_into_rows(input)
@@ -30,25 +42,37 @@ class NightReader
     end
   end
 
-  def scan_rows
+  def scan_rows_to_length_of_eighty
     scan_first_row
     scan_second_row
     scan_third_row
   end
 
   def scan_first_row
-    @first_row = @first_row.join.delete("\n")
-    @first_row = @first_row.scan(/.{1,2}/m)
+    delete_first_row_line_breaks
+    @first_row = @first_row.scan(/.{1,2}/)
   end
 
   def scan_second_row
-    @second_row = @second_row.join.delete("\n")
-    @second_row = @second_row.scan(/.{1,2}/m)
+    delete_second_row_line_breaks
+    @second_row = @second_row.scan(/.{1,2}/)
   end
 
   def scan_third_row
+    delete_third_row_line_breaks
+    @third_row = @third_row.scan(/.{1,2}/)
+  end
+
+  def delete_first_row_line_breaks
+    @first_row = @first_row.join.delete("\n")
+  end
+
+  def delete_second_row_line_breaks
+    @second_row = @second_row.join.delete("\n")
+  end
+
+  def delete_third_row_line_breaks
     @third_row = @third_row.join.delete("\n")
-    @third_row = @third_row.scan(/.{1,2}/m)
   end
 
   def zip_rows
@@ -56,7 +80,7 @@ class NightReader
   end
 
   def convert_to_braille_strings
-    @braille = @braille.scan(/.{1,6}/m)
+    @braille = @braille.scan(/.{1,6}/)
   end
 
   def translate_braille_letter(letter)
@@ -82,19 +106,8 @@ class NightReader
 
   def strip_capital_key
     english = convert_capitals
-    eng_output = english.map do |word|
+      english.map do |word|
       word.delete("%")
     end
-    eng_output
-  end
-
-  def output(input)
-    split_into_rows(input)
-    scan_rows
-    zip_rows
-    convert_to_braille_strings
-    braille_to_eng
-    convert_capitals
-    strip_capital_key.join
   end
 end
