@@ -35,6 +35,10 @@ class NightWriter
     dictionary[letter]
   end
 
+  def translate_number(number)
+    numbers[number]
+  end
+
   def translate_phrase(phrase)
     phrase_array = phrase.chars
     phrase_array.each do |char|
@@ -46,6 +50,10 @@ class NightWriter
       end
     end
     @braille
+  end
+  def braille_caps
+    @braille << dictionary["%"]
+    @braille << translate_letter(char.downcase)
   end
 
   def split_braille

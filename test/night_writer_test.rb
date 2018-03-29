@@ -2,7 +2,6 @@ require_relative 'test_helper'
 require './lib/night_writer'
 require 'pry'
 
-
 class NightWriterTest < Minitest::Test
 
   def setup
@@ -91,4 +90,18 @@ class NightWriterTest < Minitest::Test
     assert_equal expected_2, @nw.third_row
   end
 
+  def test_translate_one_number
+    expected = "0....."
+    actual = @nw.translate_number("1")
+
+    assert_equal expected, actual
+  end
+
+  def test_it_can_translate_numbers
+    skip
+    expected = ""
+    actual = @nw.translate_phrase("123 hello")
+
+    assert_equal expected, actual
+  end
 end
