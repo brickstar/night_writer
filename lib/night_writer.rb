@@ -1,5 +1,6 @@
 require_relative 'dictionary'
 require 'pry'
+
 # this is a NightWriter class
 class NightWriter
   include Dictionary
@@ -11,11 +12,23 @@ class NightWriter
               :braille_string
 
   def initialize
-      @braille    = []
-      @first_row  = ""
-      @second_row = ""
-      @third_row  = ""
-      @braille_string = ""
+    @braille    = []
+    @first_row  = ""
+    @second_row = ""
+    @third_row  = ""
+    @braille_string = ""
+  end
+
+  def output(phrase)
+    translate_phrase(phrase)
+    split_braille
+    scan_rows
+    count = 0
+    @first_row.length.times do
+      @braille_string += "#{first_row[count]}\n#{second_row[count]}\n#{third_row[count]}\n"
+      count += 1
+    end
+    @braille_string
   end
 
   def translate_letter(letter)
@@ -28,7 +41,7 @@ class NightWriter
       if char.upcase == char && ("A".."Z").cover?(char)
         @braille << dictionary["%"]
         @braille << translate_letter(char.downcase)
-      elsif
+      else
         @braille << translate_letter(char)
       end
     end
@@ -42,24 +55,21 @@ class NightWriter
   end
 
   def grab_first_two
-    first_two = @braille.map do |string|
+    @first_row += @braille.map do |string|
       string[0..1]
-    end
-    @first_row += first_two.join
+    end.join
   end
 
   def grab_second_two
-    second_two = @braille.map do |string|
+    @second_row += @braille.map do |string|
       string[2..3]
-    end
-    @second_row += second_two.join
+    end.join
   end
 
   def grab_third_two
-    third_two = @braille.map do |string|
+    @third_row = @braille.map do |string|
       string[4..5]
-    end
-    @third_row += third_two.join
+    end.join
   end
 
   def scan_rows
@@ -69,26 +79,14 @@ class NightWriter
   end
 
   def scan_first_row
-    @first_row = @first_row.scan(/.{1,80}/m)
+    @first_row = @first_row.scan(/.{1,80}/)
   end
 
   def scan_second_row
-    @second_row = @second_row.scan(/.{1,80}/m)
+    @second_row = @second_row.scan(/.{1,80}/)
   end
 
   def scan_third_row
-    @third_row = @third_row.scan(/.{1,80}/m)
-  end
-
-  def output(phrase)
-    translate_phrase(phrase)
-    split_braille
-    scan_rows
-    count = 0
-    @first_row.length.times do
-    @braille_string += "#{first_row[count]}\n#{second_row[count]}\n#{third_row[count]}\n"
-    count += 1
-    end
-    @braille_string
+    @third_row = @third_row.scan(/.{1,80}/)
   end
 end
