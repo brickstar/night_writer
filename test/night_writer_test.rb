@@ -2,7 +2,6 @@ require_relative 'test_helper'
 require './lib/night_writer'
 require 'pry'
 
-
 class NightWriterTest < Minitest::Test
 
   def setup
@@ -63,14 +62,14 @@ class NightWriterTest < Minitest::Test
   end
 
   def test_convert_special_characters
-    expected = ["......", "..00.0", "..0...", "------", "..000.", "..0.00", "....00", "....0."]
+    expected = ["......", "..00.0", "..0...", "000000", "..000.", "..0.00", "....00", "....0."]
     actual = @nw.translate_phrase(" .,\n!?-'")
 
     assert_equal expected, actual
   end
 
   def test_mixed_caps_and_special_characters
-    expected = [".....0", "0.00..", "0..0..", "..00.0", ".....0", "0.0.0.", "0.0.0.", ".....0", "0..00.", "..0.00", "....0.", "------", "....00", "......", ".000.0", ".....0", "0..00.", "..0...", "0.000.", ".....0", "0.0.0.", "00.0..", "..000."]
+    expected = [".....0", "0.00..", "0..0..", "..00.0", ".....0", "0.0.0.", "0.0.0.", ".....0", "0..00.", "..0.00", "....0.", "000000", "....00", "......", ".000.0", ".....0", "0..00.", "..0...", "0.000.", ".....0", "0.0.0.", "00.0..", "..000."]
     actual = @nw.translate_phrase("He.LlO?'\n- wO,rLd!")
 
     assert_equal expected, actual
@@ -91,4 +90,18 @@ class NightWriterTest < Minitest::Test
     assert_equal expected_2, @nw.third_row
   end
 
+  def test_translate_one_number
+    expected = "0....."
+    actual = @nw.translate_number("1")
+
+    assert_equal expected, actual
+  end
+
+  def test_it_can_translate_numbers
+    skip
+    expected = ""
+    actual = @nw.translate_phrase("123 hello")
+
+    assert_equal expected, actual
+  end
 end
